@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Delete Course?</h1>
+
+<p>Are you sure you want to delete the folowing course?</p>
+
+<table>
+<tr><td>Prefix:</td><td>{{ course.prefix }}</td></tr>
+<tr><td>Number:</td><td>{{ course.number }}</td></tr>
+<tr><td>Title:</td><td>{{ course.title }}</td></tr>
+<tr><td>Description:</td><td>{{ course.description }}</td></tr>
+<tr><td>Credit Hours:</td><td>{{ course.credit_hours }}</td></tr>
+</table>
+
+<form action="" method="POST">
+	{% csrf_token %}
+	<input type="submit" value="Yes, delete." />
+</form>
+
+{% endblock %}

@@ -3,17 +3,22 @@
 {% block title %}Course Registration System{% endblock %}
 
 {% block content %}
+<h1>Course Registration System</h1>
+
 <ul>
-	<h1>Course Registration System</h1>
+{% if user.is_authenticated %}
+	<li>User: {{ user.get_username }}</li>
+	<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+	<li><a href="{% url 'login' %}">Login</a></li>
+{% endif %}
+</ul>
 
-	{% if user.is_authenticated %}
-		<li>User: {{ user.get_username }}</li>
-		<li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
-	{% else %}
-		<li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-	{% endif %}
+<hr>
 
-	<li><a href="{% url 'catalog' %}">View Course Catalog</a></li>
-	<li><a href="{% url 'create_course' %}">Create Course</a></li>
+<ul>
+<li><a href="{% url 'catalog' %}">View Course Catalog</a></li>
+<li><a href="{% url 'create_course' %}">Create Course</a></li>
+
 </ul>
 {% endblock %}
