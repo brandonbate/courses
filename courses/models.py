@@ -12,7 +12,6 @@ class Course(models.Model):
 
     def __str__(self):
         return self.prefix + " " + str(self.number) + ": " + self.title
-        
-
+    
 class User(AbstractUser):
     pass

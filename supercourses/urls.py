@@ -21,6 +21,7 @@ from courses import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('catalog/', views.CourseCatalogListView.as_view(), name='catalog'),
+    path('create_course', views.CreateCourseFormView.as_view(), name='create_course'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]
