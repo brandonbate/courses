@@ -8,3 +8,6 @@ class Course(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     credit_hours = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(24)])
+
+    def __str__(self):
+        return self.prefix + " " + str(self.number) + ": " + self.title
