@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Course Registration System</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Course Catalog{% endblock %}
+
+{% block content %}
+
 	<h1>Course Catalog</h1>
 	
 	<ul>
@@ -18,5 +16,4 @@
 	
 	<a href="{% url 'index' %}">Home</a>
 
-</body>
-</html>
+{% endblock %}

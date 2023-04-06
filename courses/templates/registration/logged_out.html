@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Course Registration System</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
 
-  <p>Logged out!</p>
-  <a href="{% url 'login'%}">Click here to login again.</a>
-  
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<p>Logged out!</p>
+<a href="{% url 'login'%}">Click here to login again.</a>
+{% endblock %}

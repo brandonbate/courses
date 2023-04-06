@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
 
 from courses.models import Course
@@ -12,7 +12,8 @@ def index(request):
 class CourseCatalogListView(LoginRequiredMixin, ListView):
     model = Course
     
-class CreateCourseFormView(LoginRequiredMixin, CreateView):
+class CreateCourseFormView(PermissionRequiredMixin, CreateView):
     model = Course
     fields = '__all__'
+    permission_required = 'courses.course_add'
     success_url = '/'
