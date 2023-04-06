@@ -1,4 +1,6 @@
 from django.contrib import admin
-from courses.models import Course
+from django.contrib.auth.admin import UserAdmin
+from courses.models import Course, User
 
 admin.site.register(Course)
+admin.site.register(User, UserAdmin)

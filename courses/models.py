@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Course(models.Model):
@@ -11,3 +12,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.prefix + " " + str(self.number) + ": " + self.title
+        
+
+class User(AbstractUser):
+    pass
