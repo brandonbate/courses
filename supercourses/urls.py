@@ -20,5 +20,6 @@ from courses import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('catalog/', views.CourseCatalogListView.as_view(), name='catalog'),
     path('admin/', admin.site.urls),
 ]

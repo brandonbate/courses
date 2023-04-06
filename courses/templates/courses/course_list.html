@@ -6,9 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<h1>Course Registration System</h1>
-	<a href="{% url 'catalog' %}">View Course Catalog</a>
-
+	<h1>Course Catalog</h1>
 	
+	<ul>
+    {% for course in course_list %}
+		<li>{{ course }}</li>
+    {% endfor %}
+	</ul>
+	
+	<hr>
+	
+	<a href="{% url 'index' %}">Home</a>
+
 </body>
 </html>
