@@ -13,5 +13,24 @@ class Course(models.Model):
     def __str__(self):
         return self.prefix + " " + str(self.number) + ": " + self.title
     
+class Term(models.Model):
+    name = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        return self.name
+    
+class CourseInstance(models.Model):
+    # on_delete=models.PROTECT prevents Academic Terms from being deleted.
+    term = models.ForeignKey('Term', on_delete=models.PROTECT) 
+    course = models.ForeignKey('Course', on_delete=models.PROTECT)
+    section = models.CharField(max_length=6)
+    location = models.CharField(max_length=100)
+    class_time = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.term) + ", " + str(self.course) + " " + str(self.section)
+
 class User(AbstractUser):
     pass
