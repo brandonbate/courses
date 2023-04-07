@@ -18,9 +18,9 @@
 
 {% if user.is_authenticated %}
 	<ul>
-	<li><a href="{% url 'catalog' %}">View Course Catalog</a></li>
+	<li><a href="{% url 'course_list' %}">View Course Catalog</a></li>
 	{% if perms.courses.course_add %}
-		<li><a href="{% url 'create_course' %}">Create Course</a></li>
+		<li><a href="{% url 'course_create' %}">Create Course</a></li>
 	{% endif %}
 	</ul>
 {% endif %}

@@ -20,12 +20,12 @@ from courses import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('catalog/', views.CourseCatalogListView.as_view(), name='catalog'),
     
-    path('create_course', views.CreateCourseFormView.as_view(), name='create_course'),
-    path('course/<int:pk>/update/', views.UpdateCourseFormView.as_view(), name='update_course'),
-    path('course/<int:pk>/delete/', views.DeleteCourseFormView.as_view(), name='delete_course'),
-    path('course/<int:pk>/detail/', views.DetailCourseFormView.as_view(), name='detail_course'),
+    path('course/list/', views.CourseListView.as_view(), name='course_list'),
+    path('course/create', views.CourseCreateFormView.as_view(), name='course_create'),
+    path('course/<int:pk>/update/', views.CourseUpdateFormView.as_view(), name='course_update'),
+    path('course/<int:pk>/delete/', views.CourseDeleteFormView.as_view(), name='course_delete'),
+    path('course/<int:pk>/detail/', views.CourseDetailFormView.as_view(), name='course_detail'),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),

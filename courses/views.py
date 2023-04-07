@@ -10,25 +10,25 @@ from courses.models import Course
 def index(request):
     return render(request, 'index.html')
 
-class CourseCatalogListView(LoginRequiredMixin, ListView):
+class CourseListView(LoginRequiredMixin, ListView):
     model = Course
     
-class CreateCourseFormView(PermissionRequiredMixin, CreateView):
+class CourseCreateFormView(PermissionRequiredMixin, CreateView):
     model = Course
     fields = '__all__'
     permission_required = 'courses.course_add'
-    success_url = reverse_lazy('catalog')
+    success_url = reverse_lazy('course_list')
     
-class UpdateCourseFormView(PermissionRequiredMixin, UpdateView):
+class CourseUpdateFormView(PermissionRequiredMixin, UpdateView):
     model = Course
     fields = '__all__'
     permission_required = 'courses.course_change'
-    success_url = reverse_lazy('catalog')
+    success_url = reverse_lazy('course_list')
 
-class DeleteCourseFormView(PermissionRequiredMixin, DeleteView):
+class CourseDeleteFormView(PermissionRequiredMixin, DeleteView):
     model = Course
     permission_required = 'courses.course_delete'
-    success_url = reverse_lazy('catalog')
+    success_url = reverse_lazy('course_list')
 
-class DetailCourseFormView(DetailView):
+class CourseDetailFormView(DetailView):
     model = Course
