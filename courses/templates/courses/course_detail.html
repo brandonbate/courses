@@ -15,10 +15,14 @@
 	</table>
 
 	<hr>
+	{% if perms.courses.course_change %}
 	<a href="{% url 'update_course' pk=course.id %}">Update Course</a>
+	{% endif %}
+	{% if perms.courses.course_delete %}
 	<a href="{% url 'delete_course' pk=course.id %}">Delete Course</a>
+	{% endif %}
 	<hr>
-	<a href="{% url 'index' %}">Home</a>
+	<a href="{% url 'index' %}">Home</a> |
 	<a href="{% url 'catalog' %}">View Catalog</a>
 
 
