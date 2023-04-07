@@ -27,6 +27,12 @@ urlpatterns = [
     path('course/<int:pk>/delete/', views.CourseDeleteFormView.as_view(), name='course_delete'),
     path('course/<int:pk>/detail/', views.CourseDetailFormView.as_view(), name='course_detail'),
 
+    path('term/list/', views.TermListView.as_view(), name='term_list'),
+    path('term/create', views.TermCreateFormView.as_view(), name='term_create'),
+    path('term/<int:pk>/update/', views.TermUpdateFormView.as_view(), name='term_update'),
+    path('term/<int:pk>/delete/', views.TermDeleteFormView.as_view(), name='term_delete'),
+    path('term/<int:pk>/detail/', views.TermDetailFormView.as_view(), name='term_detail'),
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

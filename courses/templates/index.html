@@ -19,8 +19,14 @@
 {% if user.is_authenticated %}
 	<ul>
 	<li><a href="{% url 'course_list' %}">View Course Catalog</a></li>
+	<li><a href="{% url 'term_list' %}">View Academic Terms</a></li>
+
 	{% if perms.courses.course_add %}
 		<li><a href="{% url 'course_create' %}">Create Course</a></li>
+	{% endif %}
+	
+	{% if perms.courses.term_add %}
+		<li><a href="{% url 'term_create' %}">Create Academic Term</a></li>
 	{% endif %}
 	</ul>
 {% endif %}

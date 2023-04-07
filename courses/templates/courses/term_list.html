@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Academic Terms{% endblock %}
+
+{% block content %}
+
+	<h1>Academic Terms</h1>
+	
+	<ul>
+    {% for term in term_list %}
+		<li><a href="{% url 'term_detail' pk=term.id %}">{{ term }} </a></li>
+    {% endfor %}
+	</ul>
+	
+	<hr>
+	
+	<a href="{% url 'index' %}">Home</a>
+	<a href="{% url 'course_list' %}">View Catalog</a> |
+	<a href="{% url 'term_list' %}">View Academic Terms</a>
+
+{% endblock %}
