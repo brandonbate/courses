@@ -4,18 +4,20 @@
 
 {% block content %}
 
-	<h1>Academic Terms</h1>
+<div class="container-lg pt-3 col-sm-6">
+	<table class="table table-striped">
+		<tbody>
+			<tr><th>Academic Terms</th></tr>
 	
-	<ul>
-    {% for term in term_list %}
-		<li><a href="{% url 'term_detail' pk=term.id %}">{{ term }} </a></li>
-    {% endfor %}
-	</ul>
+			{% for term in term_list %}
+				<tr><td><a href="{% url 'term_detail' pk=term.id %}">{{ term }} </a></td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
 	
-	<hr>
-	
-	<a href="{% url 'index' %}">Home</a>
-	<a href="{% url 'course_list' %}">View Catalog</a> |
-	<a href="{% url 'term_list' %}">View Academic Terms</a>
+	{% if perms.courses.term_add %}
+	<a href="{% url 'term_create' %}" class="btn btn-primary" role="button">Add Term</a>
+	{% endif %}	
+</div>
 
 {% endblock %}

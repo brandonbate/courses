@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Course Instance Listings{% endblock %}
+
+{% block content %}
+
+<div class="container-lg pt-3 col-sm-6">
+	<table class="table table-striped">
+		<thead>
+			<tr><th>Course Instances</th></tr>
+		</thead>
+		<tbody>
+			{% for courseinstance in courseinstance_list %}
+			<tr><td><a href="{% url 'courseinstance_detail' pk=courseinstance.id %}">{{ courseinstance }} </a></td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if perms.courses.courseinstance_add %}
+	<a href="{% url 'courseinstance_create' %}" class="btn btn-primary" role="button">Add Course Instance</a>
+	{% endif %}	
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-lg pt-3 col-sm-7">
+	<table class="table">
+		<tbody>
+			<tr><td>Prefix:</td><td>{{ courseinstance.course.prefix }}</td></tr>
+			<tr><td>Number:</td><td>{{ courseinstance.course.number }}</td></tr>
+			<tr><td>Title:</td><td>{{ courseinstance.course.title }}</td></tr>
+			<tr><td>Description:</td><td>{{ courseinstance.course.description }}</td></tr>
+			<tr><td>Credit Hours:</td><td>{{ courseinstance.course.credit_hours }}</td></tr>
+			<tr><td>Term:</td><td>{{ courseinstance.term }}</td></tr>
+		</tbody>
+	</table>
+	<div class="alert alert-danger" role="alert">
+	Are you sure you want to delete the above course instance?
+	</div>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<input class="btn btn-danger float-end" type="submit" value="Yes, delete."/>
+	</form>
+</div>
+
+{% endblock %}

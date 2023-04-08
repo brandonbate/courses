@@ -3,17 +3,20 @@
 {% block title %}Course Catalog{% endblock %}
 
 {% block content %}
-
-	<h1>Course Catalog</h1>
-	
-	<ul>
-    {% for course in course_list %}
-		<li><a href="{% url 'course_detail' pk=course.id %}">{{ course }} </a></li>
-    {% endfor %}
-	</ul>
-	
-	<hr>
-	
-	<a href="{% url 'index' %}">Home</a>
-
+<div class="container-lg pt-3 col-sm-6">
+	<table class="table table-striped">
+		<thead>
+			<tr><th>Course Catalog</th></tr>
+		</thead>
+		<tbody>
+			{% for course in course_list %}
+			<tr><td><a href="{% url 'course_detail' pk=course.id %}">{{ course }} </a></td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
+		
+	{% if perms.courses.course_add %}
+	<a href="{% url 'course_create' %}" class="btn btn-primary" role="button">Add Course</a>
+	{% endif %}		
+</div>
 {% endblock %}

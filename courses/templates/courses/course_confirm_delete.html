@@ -2,21 +2,28 @@
 
 {% block content %}
 
-<h1>Delete Course?</h1>
 
-<p>Are you sure you want to delete the folowing course?</p>
+	<div class="container-lg pt-3 col-sm-7">
+		<table class="table">
+			<thead>
+				<tr><th class="col-sm-3">Course Details</th><th></th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Prefix:</td><td>{{ course.prefix }}</td></tr>
+				<tr><td>Number:</td><td>{{ course.number }}</td></tr>
+				<tr><td>Title:</td><td>{{ course.title }}</td></tr>
+				<tr><td>Description:</td><td>{{ course.description }}</td></tr>
+				<tr><td>Credit Hours:</td><td>{{ course.credit_hours }}</td></tr>
+			</tbody>
+		</table>
 
-<table>
-<tr><td>Prefix:</td><td>{{ course.prefix }}</td></tr>
-<tr><td>Number:</td><td>{{ course.number }}</td></tr>
-<tr><td>Title:</td><td>{{ course.title }}</td></tr>
-<tr><td>Description:</td><td>{{ course.description }}</td></tr>
-<tr><td>Credit Hours:</td><td>{{ course.credit_hours }}</td></tr>
-</table>
-
-<form action="" method="POST">
-	{% csrf_token %}
-	<input type="submit" value="Yes, delete." />
-</form>
+		<div class="alert alert-danger" role="alert">
+		Are you sure you want to delete the folowing course?
+		</div>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<input class="btn btn-danger float-end" type="submit" value="Yes, delete."/>
+	</form>
+	</div>
 
 {% endblock %}

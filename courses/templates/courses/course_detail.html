@@ -4,27 +4,29 @@
 
 {% block content %}
 
-	<h1>Course Details</h1>
+	<div class="container-lg pt-3 col-sm-7">
+		<table class="table">
+			<thead>
+				<tr><th class="col-sm-3">Course Details</th><th></th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Prefix:</td><td>{{ course.prefix }}</td></tr>
+				<tr><td>Number:</td><td>{{ course.number }}</td></tr>
+				<tr><td>Title:</td><td>{{ course.title }}</td></tr>
+				<tr><td>Description:</td><td>{{ course.description }}</td></tr>
+				<tr><td>Credit Hours:</td><td>{{ course.credit_hours }}</td></tr>
+			</tbody>
+		</table>
+
+		{% if perms.courses.course_change %}
+		<a href="{% url 'course_update' pk=course.id %}" class="btn btn-primary" role="button">Update</a>
+		{% endif %}
+		
+		{% if perms.courses.course_delete %}
+		<a href="{% url 'course_delete' pk=course.id %}" class="btn btn-danger" role="button">Delete</a>
+		{% endif %}
+
+	</div>
 	
-	<table>
-	<tr><td>Prefix:</td><td>{{ course.prefix }}</td></tr>
-	<tr><td>Number:</td><td>{{ course.number }}</td></tr>
-	<tr><td>Title:</td><td>{{ course.title }}</td></tr>
-	<tr><td>Description:</td><td>{{ course.description }}</td></tr>
-	<tr><td>Credit Hours:</td><td>{{ course.credit_hours }}</td></tr>
-	</table>
-
-	<hr>
-	{% if perms.courses.course_change %}
-	<a href="{% url 'course_update' pk=course.id %}">Update Course</a>
-	{% endif %}
-	{% if perms.courses.course_delete %}
-	<a href="{% url 'course_delete' pk=course.id %}">Delete Course</a>
-	{% endif %}
-	<hr>
-	<a href="{% url 'index' %}">Home</a> |
-	<a href="{% url 'course_list' %}">View Catalog</a>
-
-
 {% endblock %}
 

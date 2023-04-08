@@ -4,25 +4,25 @@
 
 {% block content %}
 
-	<h1>Academic Term Details</h1>
-	
-	<table>
-	<tr><td>Name:</td><td>{{ term.name }}</td></tr>
-	<tr><td>Start Date:</td><td>{{ term.start_date }}</td></tr>
-	<tr><td>End Date:</td><td>{{ term.end_date }}</td></tr>
+<div class="container-lg pt-3 col-sm-7">
+	<table class="table">
+		<tbody>
+			<tr><th>Academic Term</th><th></th></tr>
+			<tr><td>Name:</td><td>{{ term.name }}</td></tr>
+			<tr><td>Start Date:</td><td>{{ term.start_date }}</td></tr>
+			<tr><td>End Date:</td><td>{{ term.end_date }}</td></tr>
+		</tbody>
 	</table>
-
-	<hr>
+	
 	{% if perms.courses.term_change %}
-	<a href="{% url 'term_update' pk=term.id %}">Update Term</a>
+	<a href="{% url 'term_update' pk=term.id %}" class="btn btn-primary" role="button">Update</a>
 	{% endif %}
 	{% if perms.courses.term_delete %}
-	<a href="{% url 'term_delete' pk=term.id %}">Delete Term</a>
+	<a href="{% url 'term_delete' pk=term.id %}" class="btn btn-danger" role="button">Delete</a>
 	{% endif %}
-	<hr>
-	<a href="{% url 'index' %}">Home</a> |
-	<a href="{% url 'course_list' %}">View Catalog</a> |
-	<a href="{% url 'term_list' %}">View Academic Terms</a>
+
+</div>
+
 
 
 {% endblock %}

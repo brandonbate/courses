@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Course Instance Details{% endblock %}
+
+{% block content %}
+
+	<div class="container-lg pt-3 col-sm-7">
+		<table class="table">
+			<thead>
+				<tr><th class="col-sm-3">Course Instance Details</th><th></th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Prefix:</td><td>{{ courseinstance.course.prefix }}</td></tr>
+				<tr><td>Number:</td><td>{{ courseinstance.course.number }}</td></tr>
+				<tr><td>Title:</td><td>{{ courseinstance.course.title }}</td></tr>
+				<tr><td>Description:</td><td>{{ courseinstance.course.description }}</td></tr>
+				<tr><td>Credit Hours:</td><td>{{ courseinstance.course.credit_hours }}</td></tr>
+				<tr><td>Term:</td><td>{{ courseinstance.term }}</td></tr>
+				<tr><td>Section:</td><td>{{ courseinstance.section }}</td></tr>
+				<tr><td>Class Time:</td><td>{{ courseinstance.class_time }}</td></tr>
+			</tbody>
+		</table>
+
+		{% if perms.courses.course_change %}
+		<a href="{% url 'courseinstance_update' pk=courseinstance.id %}" class="btn btn-primary" role="button">Update</a>
+		{% endif %}
+		
+		{% if perms.courses.course_delete %}
+		<a href="{% url 'courseinstance_delete' pk=courseinstance.id %}" class="btn btn-danger" role="button">Delete</a>
+		{% endif %}
+	</div>
+{% endblock %}
+

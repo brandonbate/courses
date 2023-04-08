@@ -3,8 +3,9 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.db.models import ProtectedError
 
-from courses.models import Course, Term
+from courses.models import Course, Term, CourseInstance
 
 
 def index(request):
@@ -32,6 +33,14 @@ class CourseDeleteFormView(PermissionRequiredMixin, DeleteView):
     permission_required = 'courses.course_delete'
     success_url = reverse_lazy('course_list')
 
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except ProtectedError:
+            error = 'Cannot delete because there is a course instance linked to this course.'
+            return render(request, 'error.html', {'error': error})
+
+
 class CourseDetailFormView(DetailView):
     model = Course
 
@@ -56,7 +65,38 @@ class TermDeleteFormView(PermissionRequiredMixin, DeleteView):
     model = Term
     permission_required = 'courses.term_delete'
     success_url = reverse_lazy('term_list')
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            return self.delete(request, *args, **kwargs)
+        except ProtectedError:
+            error = 'Cannot delete because there is a course instance with this academic term.'
+            return render(request, 'error.html', {'error': error})
 
 class TermDetailFormView(DetailView):
     model = Term
 
+# CourseInstance Views
+
+class CourseInstanceListView(LoginRequiredMixin, ListView):
+    model = CourseInstance
+    
+class CourseInstanceCreateFormView(PermissionRequiredMixin, CreateView):
+    model = CourseInstance
+    fields = '__all__'
+    permission_required = 'courses.courseinstance_add'
+    success_url = reverse_lazy('courseinstance_list')
+    
+class CourseInstanceUpdateFormView(PermissionRequiredMixin, UpdateView):
+    model = CourseInstance
+    fields = '__all__'
+    permission_required = 'courses.courseinstance_change'
+    success_url = reverse_lazy('courseinstance_list')
+
+class CourseInstanceDeleteFormView(PermissionRequiredMixin, DeleteView):
+    model = CourseInstance
+    permission_required = 'courses.courseinstance_delete'
+    success_url = reverse_lazy('courseinstance_list')
+
+class CourseInstanceDetailFormView(DetailView):
+    model = CourseInstance

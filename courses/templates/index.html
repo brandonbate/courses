@@ -3,31 +3,41 @@
 {% block title %}Course Registration System{% endblock %}
 
 {% block content %}
-<h1>Course Registration System</h1>
+<div class="container-lg pt-3 col-sm-7">
+	{% if user.is_authenticated %}
+		<div class="container-lg col-sm-7">
+		<table class="table table-striped">
+			<thead>
+			<tr><td><h3>Tasks</h3></td></tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><a href="{% url 'course_list' %}">View Course Catalog</a></td>
+				{% if perms.courses.course_add %}
+				<td><a href="{% url 'course_create' %}">Create Course</a></td>
+				{% endif %}
+			</tr>
+			<tr>
+				<td><a href="{% url 'term_list' %}">View Academic Terms</a></td>
+				{% if perms.courses.term_add %}
+				<td><a href="{% url 'term_create' %}">Create Academic Term</a></td>
+				{% endif %}
+			</tr>
+			<tr>
+				<td><a href="{% url 'courseinstance_list' %}">View Course Instances</a></td>
+				{% if perms.courses.course_instance_add %}
+				<td><a href="{% url 'courseinstance_create' %}">Create Course Instance</a></td>
+				{% endif %}	
+			</tr>
+			</tbody>
+		</table>
 
-<ul>
-{% if user.is_authenticated %}
-	<li>User: {{ user.get_username }}</li>
-	<li><a href="{% url 'logout' %}">Logout</a></li>
-{% else %}
-	<li><a href="{% url 'login' %}">Login</a></li>
-{% endif %}
-</ul>
-
-<hr>
-
-{% if user.is_authenticated %}
-	<ul>
-	<li><a href="{% url 'course_list' %}">View Course Catalog</a></li>
-	<li><a href="{% url 'term_list' %}">View Academic Terms</a></li>
-
-	{% if perms.courses.course_add %}
-		<li><a href="{% url 'course_create' %}">Create Course</a></li>
+	{% else %}
+		<div class="alert alert-primary" role="alert">
+		<a href="{% url 'login' %}">Log In</a> to gain access.
+		</div>
 	{% endif %}
-	
-	{% if perms.courses.term_add %}
-		<li><a href="{% url 'term_create' %}">Create Academic Term</a></li>
-	{% endif %}
-	</ul>
-{% endif %}
+</div>
+
+
 {% endblock %}

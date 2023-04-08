@@ -2,19 +2,22 @@
 
 {% block content %}
 
-<h1>Delete Academic Term?</h1>
-
-<p>Are you sure you want to delete the folowing acdemic term?</p>
-
-<table>
-<tr><td>Name:</td><td>{{ term.name }}</td></tr>
-<tr><td>Start Date:</td><td>{{ term.start_date }}</td></tr>
-<tr><td>End Date:</td><td>{{ term.end_date }}</td></tr>
-</table>
-
-<form action="" method="POST">
-	{% csrf_token %}
-	<input type="submit" value="Yes, delete." />
-</form>
+<div class="container-lg pt-3 col-sm-7">
+	<table class="table">
+		<tbody>
+			<tr><th>Academic Term</th><th></th></tr>
+			<tr><td>Name:</td><td>{{ term.name }}</td></tr>
+			<tr><td>Start Date:</td><td>{{ term.start_date }}</td></tr>
+			<tr><td>End Date:</td><td>{{ term.end_date }}</td></tr>
+		</tbody>
+	</table>
+	<div class="alert alert-danger" role="alert">
+	Are you sure you want to delete the above academic term?
+	</div>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<input class="btn btn-danger float-end" type="submit" value="Yes, delete."/>
+	</form>
+</div>
 
 {% endblock %}
