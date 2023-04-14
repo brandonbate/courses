@@ -50,4 +50,5 @@ class CourseInstanceStudent(models.Model):
         return str(self.student) + " " + str(self.course_instance)
 
 class User(AbstractUser):
-    pass
+    def __str__(self):
+        return str(self.first_name) + " " + str(self.last_name)
