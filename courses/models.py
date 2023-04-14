@@ -32,5 +32,22 @@ class CourseInstance(models.Model):
     def __str__(self):
         return str(self.term) + ", " + str(self.course) + " " + str(self.section)
 
+# Records which faculty are instructors for a course instance. This structure
+# allows for faculty to team teach a course.
+class CourseInstanceInstructor(models.Model):
+    course_instance = models.ForeignKey('CourseInstance', on_delete=models.PROTECT)
+    instructor = models.ForeignKey('User', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.instructor) + " " + str(self.course_instance)
+
+# Records which students are enrolled in a course instance.
+class CourseInstanceStudent(models.Model):
+    course_instance = models.ForeignKey('CourseInstance', on_delete=models.PROTECT)
+    student = models.ForeignKey('User', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return str(self.student) + " " + str(self.course_instance)
+
 class User(AbstractUser):
     pass
