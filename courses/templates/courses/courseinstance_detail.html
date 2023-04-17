@@ -28,6 +28,33 @@
 		{% if perms.courses.course_delete %}
 		<a href="{% url 'courseinstance_delete' pk=courseinstance.id %}" class="btn btn-danger" role="button">Delete</a>
 		{% endif %}
+
+		<br>
+		<br>
+
+		<table class="table">
+			<thead>
+				<tr><th class="col-sm-3">Course Instructor(s)</th></tr>
+			</thead>
+			<tbody>
+				{% for instructor in instructors %}
+				<tr><td>{{instructor}}</td></tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<br>
+
+		<table class="table">
+			<thead>
+				<tr><th class="col-sm-3">Course Roster</th></tr>
+			</thead>
+			<tbody>
+				{% for student in students %}
+				<tr><td>{{student}}</td></tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 {% endblock %}
 

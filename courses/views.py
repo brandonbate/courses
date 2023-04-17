@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import ProtectedError
 
-from courses.models import Course, Term, CourseInstance
+from courses.models import Course, Term, CourseInstance, CourseInstanceStudent, CourseInstanceInstructor
 
 
 def index(request):
@@ -100,3 +100,10 @@ class CourseInstanceDeleteFormView(PermissionRequiredMixin, DeleteView):
 
 class CourseInstanceDetailFormView(DetailView):
     model = CourseInstance
+    
+    def get_context_data(self, **kwargs):
+        context = super(CourseInstanceDetailFormView, self).get_context_data(**kwargs)
+        context['students'] = [x.student for x in CourseInstanceStudent.objects.filter(course_instance = self.object)]
+        context['instructors'] = [x.instructor for x in CourseInstanceInstructor.objects.filter(course_instance = self.object)]
+
+        return context
