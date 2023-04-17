@@ -2,6 +2,9 @@
 
 {% block title %}Course Registration System{% endblock %}
 
+{% load auth_extras %}
+
+
 {% block content %}
 <div class="container-lg pt-3 col-sm-7">
 	{% if user.is_authenticated %}
@@ -28,7 +31,12 @@
 				{% if perms.courses.course_instance_add %}
 				<td><a href="{% url 'courseinstance_create' %}">Create Course Instance</a></td>
 				{% endif %}	
-			</tr>
+			</tr>			
+			{% if request.user|has_group:"Students" %} 
+			<tr>
+				<td><a href=#>Enroll in a Course</a></td>
+			</tr>							
+			{% endif %}
 			</tbody>
 		</table>
 
