@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Course Offerings by Academic Term
+{% endblock %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+
+function termChange() {
+	console.log(document.getElementById("id_term").value);
+	$.ajax(
+		{url: '/ajax/course-instances-by-term/', 
+		data: {'term': document.getElementById("id_term").value},
+		success: function (data) {
+			document.getElementById("id_output_tbody").innerHTML = data;
+		}
+	});
+}
+</script>
+
+<div class="container-lg pt-3 col-sm-8">
+	<form>
+	<label for="id_term"><strong>Academic Term:</strong></label>
+
+	<select id="id_term" name="id_term" onchange="termChange()">
+		{% for term in terms %}
+		<option value="{{term.id}}">{{term}}</option>
+		{% endfor %}
+	</select>
+	</form>
+	
+	<br>
+	<br>
+
+	<table class="table table-striped">
+		<thead>
+		<th>Prefix</th><th>Number</th><th>Title</th><th>Section</th><th>Credits</th>
+		<th>Time</th><th>Instructor</th><th></th>
+		</thead>
+		<tbody id="id_output_tbody">
+		</tbody>
+	</table>
+</div>
+
+<script>
+termChange();
+</script>
+
+{% endblock %}

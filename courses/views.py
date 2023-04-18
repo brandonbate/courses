@@ -11,8 +11,23 @@ from courses.models import Course, Term, CourseInstance, CourseInstanceStudent, 
 def index(request):
     return render(request, 'index.html')
 
-# Course Views
+def course_instances_by_term(request):
+    terms = Term.objects.all().order_by('-start_date')
+    return render(request, 'course_instances_by_term.html', {'terms': terms})    
 
+def ajax_course_instances_by_term(request):
+    term_id = request.GET.get('term')
+    course_instances = CourseInstance.objects.filter(term = term_id)
+    print(course_instances)
+    for ci in course_instances:
+        ci.instructors = '; '.join([str(x.instructor) for x in CourseInstanceInstructor.objects.filter(course_instance = ci)])
+        
+    return render(request,
+                  'ajax_course_instances_by_term.html',
+                  {'course_instances': course_instances})
+
+
+# Course Views
 class CourseListView(LoginRequiredMixin, ListView):
     model = Course
     

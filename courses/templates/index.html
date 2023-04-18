@@ -31,7 +31,10 @@
 				{% if perms.courses.course_instance_add %}
 				<td><a href="{% url 'courseinstance_create' %}">Create Course Instance</a></td>
 				{% endif %}	
-			</tr>			
+			</tr>
+			<tr>
+				<td><a href="{% url 'course_instances_by_term' %}">Course Offerings by Term</a></td>
+			</tr>
 			{% if request.user|has_group:"Students" %} 
 			<tr>
 				<td><a href=#>Enroll in a Course</a></td>

@@ -1,0 +1,12 @@
+{% for ci in course_instances  %}
+<tr>
+<td>{{ ci.course.prefix }}</td>
+<td>{{ ci.course.number }}</td>
+<td>{{ci.course.title}}</td>
+<td>{{ci.section}}</td>
+<td>{{ci.course.credit_hours}}</td>
+<td>{{ci.class_time}}</td>
+<td>{{ci.instructors}}</td>
+<td><a href="{% url 'courseinstance_detail' pk=ci.id %}">Details</a></td>
+</tr>
+{% endfor %}
