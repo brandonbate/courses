@@ -2,8 +2,9 @@
 
 {% block title %}Course Instance Details{% endblock %}
 
-{% block content %}
+{% load auth_extras %}
 
+{% block content %}
 	<div class="container-lg pt-3 col-sm-7">
 		<table class="table">
 			<thead>
@@ -20,6 +21,10 @@
 				<tr><td>Class Time:</td><td>{{ courseinstance.class_time }}</td></tr>
 			</tbody>
 		</table>
+
+		{% if request.user|has_group:"Students" %} 
+		<a href="{% url 'enroll_in_course' pk=courseinstance.id %}" class="btn btn-primary" role="button">Enroll</a>
+		{% endif %}
 
 		{% if perms.courses.course_change %}
 		<a href="{% url 'courseinstance_update' pk=courseinstance.id %}" class="btn btn-primary" role="button">Update</a>

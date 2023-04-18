@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -26,6 +26,24 @@ def ajax_course_instances_by_term(request):
                   'ajax_course_instances_by_term.html',
                   {'course_instances': course_instances})
 
+def enroll_in_course(request, pk):
+    user = request.user
+    
+    if not user.is_authenticated:
+        error = 'Must be logged in to enroll in a course.'
+        return render(request, 'error.html', {'error': error})
+    
+    # Check if ci_id is valid.
+    course_instance = CourseInstance.objects.get(id = pk)
+    
+    if not course_instance:
+        error = 'Must be logged in to enroll in a course.'
+        return render(request, 'error.html', {'error': error})
+
+    new_enrollment = CourseInstanceStudent(course_instance = course_instance, student=user)
+    new_enrollment.save()
+
+    return redirect('/')
 
 # Course Views
 class CourseListView(LoginRequiredMixin, ListView):

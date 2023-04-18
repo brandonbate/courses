@@ -23,6 +23,7 @@ urlpatterns = [
 
     path('course-instances-by-term/', views.course_instances_by_term, name='course_instances_by_term'),
     path('ajax/course-instances-by-term/', views.ajax_course_instances_by_term, name='ajax_course_instances_by_term'),
+    path('course/<int:pk>/enroll/', views.enroll_in_course, name='enroll_in_course'),
     
     path('course/list/', views.CourseListView.as_view(), name='course_list'),
     path('course/create/', views.CourseCreateFormView.as_view(), name='course_create'),
