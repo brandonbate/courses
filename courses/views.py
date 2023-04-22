@@ -5,6 +5,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.db.models import ProtectedError
 
+# I forgot to import these on an earlier commit!
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from courses.models import Course, Term, CourseInstance, CourseInstanceStudent, CourseInstanceInstructor
 
 
@@ -33,7 +37,6 @@ def enroll_in_course(request, pk):
         error = 'Must be logged in to enroll in a course.'
         return render(request, 'error.html', {'error': error})
     
-    # Check if ci_id is valid.
     course_instance = CourseInstance.objects.get(id = pk)
     
     if not course_instance:
@@ -43,7 +46,7 @@ def enroll_in_course(request, pk):
     new_enrollment = CourseInstanceStudent(course_instance = course_instance, student=user)
     new_enrollment.save()
 
-    return redirect('/')
+    return HttpResponseRedirect(reverse('courseinstance_detail', kwargs={'pk':course_instance.id}))
 
 # Course Views
 class CourseListView(LoginRequiredMixin, ListView):
